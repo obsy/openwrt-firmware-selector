@@ -413,6 +413,11 @@ function getNameDifference(images, image) {
   }
 }
 
+// get version label (from path)
+function getLabel() {
+  return config.versions[$("#versions").value].split('/').pop()
+}
+
 // add download button for image
 function createLink(mobj, image, image_url) {
   const a = document.createElement("A");
@@ -422,6 +427,7 @@ function createLink(mobj, image, image_url) {
       .replace("{title}", encodeURI($("#models").value))
       .replace("{target}", mobj.target)
       .replace("{id}", mobj.id)
+      .replace("{label}", getLabel())
       .replace("{version}", mobj.version_number) +
     "/" +
     image.name;
@@ -491,6 +497,7 @@ function updateImages(mobj, overview, is_custom) {
         .replace("{title}", encodeURI($("#models").value))
         .replace("{target}", mobj.target)
         .replace("{id}", mobj.id)
+        .replace("{label}", getLabel())
         .replace("{version}", mobj.version_number)
     );
 
@@ -523,7 +530,7 @@ function updateImages(mobj, overview, is_custom) {
       null,
       document.location.href.split("?")[0] +
         "?version=" +
-        encodeURIComponent(mobj.version_number) +
+        encodeURIComponent(getLabel()) +
         "&target=" +
         encodeURIComponent(mobj.target) +
         "&id=" +
