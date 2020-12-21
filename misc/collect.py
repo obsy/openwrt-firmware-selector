@@ -110,10 +110,15 @@ def add_profile(args, releases, profile):
         return re.sub(r"^[A-Za-z]+://", "", url, 1)
 
     if args.use_basename_version:
+        # get first element of distinct file path
         file_path = strip_protocol(profile["file_path"])
         release_src = strip_protocol(args.release_src)
+        print("file_path:   {}".format(file_path))
+        print("release_src: {}".format(release_src))
         idx = file_path.index(release_src)
-        release = file_path[idx + len(release_src) :].strip("/").split("/")[0]
+        release = next(filter(None, file_path[idx + len(release_src) :].split("/")))
+        print("release: {}".format(release))
+        #release = file_path[idx + len(release_src) :].strip("/").split("/")[0]
         releases.setdefault(release, []).append(profile)
     else:
         release = profile["file_content"]["version_number"]
@@ -248,7 +253,7 @@ Usage Examples:
     parser.add_argument(
         "--update-default-version",
         action="store_true",
-        help="Update the default_version in config.js.",
+        help="Update default_version in config.js.",
     )
     parser.add_argument("--info-url", help="Info URL template.")
     parser.add_argument("--image-url", help="URL template to download images.")

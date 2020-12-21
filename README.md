@@ -23,12 +23,12 @@ This firmware selector can speak to a [ASU server](https://github.com/aparcar/as
 Place the `www/` folder somewhere web accessible. Then use the `collect.py` script to update `www/config.json` and write all device data into `www/data/`:
 
 ```
-./misc/collect.py -update-default-version --image-url 'https://downloads.openwrt.org/{base}/{target}' https://downloads.openwrt.org www/
+./misc/collect.py --update-default-version --image-url 'https://downloads.openwrt.org/{base}/{target}' https://downloads.openwrt.org www/
 ```
 or for local accessible OpenWrt builds:
 
 ```
-./misc/collect.py -update-default-version --image-url 'https://downloads.openwrt.org/{base}/{target}' ~/openwrt/bin www/
+./misc/collect.py --update-default-version --image-url 'https://downloads.openwrt.org/{base}/{target}' ~/openwrt/bin www/
 ```
 
 This should do it!
@@ -43,6 +43,7 @@ Variables:
 * `{version}`: Version in the profiles.json files. E.g. `19.07.4` or `SNAPSHOT`.
 * `{id}`: Device identifier. E.g. `tplink_archer-c7-v2`
 * `{target}`: Main- and sub target, E.g. `ath79/generic`.
+* `{label}`: First element of the path. Usually the same as `{version}`.
 * `{base}`: Distinct path to the targets directory. E.g. `releases/18.06.8/targets/`  
   Handled by `misc/collect.py` only!
 

@@ -21,8 +21,8 @@ function hide(query) {
   $(query).classList.add("hide");
 }
 
-function split(str) {
-  return str.match(/[^\s,]+/g) || [];
+function split(str, sep = " ") {
+  return str.split(sep).filter(e => e.length);
 }
 
 function getModelTitles(titles) {
@@ -413,9 +413,9 @@ function getNameDifference(images, image) {
   }
 }
 
-// get version label (from path)
+// get version label from first element of the path
 function getLabel() {
-  return config.versions[$("#versions").value].split('/').pop()
+  return split(config.versions[$("#versions").value], "/")[0];
 }
 
 // add download button for image
